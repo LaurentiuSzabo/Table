@@ -1,0 +1,54 @@
+.table {
+  margin-bottom: 0;
+}
+
+.table tr.clickable {
+  cursor: pointer;
+}
+
+.table .nested-content {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.table i {
+  cursor: pointer;
+  margin-right: 5px;
+  transition: transform 0.3s ease;
+}
+
+.table i.rotated::before {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+
+.table {
+  margin-bottom: 0;
+}
+
+.table tr.clickable {
+  cursor: pointer;
+}
+
+.hover-buttons {
+  top: 50%;
+  right: 10px;
+}
+
+.table tr.clickable:hover .hover-buttons {
+  display: flex;
+}
+
+.table tr.clickable:hover {
+  background-color: #f8f9fa;
+}
+
+.hover-buttons button {
+  margin-right: 5px;
+}
+
+.cursor-resize, .handle, .handle i {
+  cursor: col-resize;
+}
+

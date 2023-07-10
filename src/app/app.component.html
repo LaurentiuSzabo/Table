@@ -1,0 +1,26 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col pt-6">
+      <h1>AGB table</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col py-4 ">
+      <label for="searchQuery" class="form-label">Search for name</label>
+      <input
+          type="text"
+          class="form-control mb-4"
+          id="searchQuery"
+          (input)="onSearchQueryInput($event)"
+        />
+      <agb-table
+        [tableHeaders]="tableHeaders"
+        [tableRows]="tableRows"
+        (editRowClick)="editRow($event)"
+        (deleteRowClick)="deleteRow($event)">
+      </agb-table>
+    </div>
+  </div>
+</div>

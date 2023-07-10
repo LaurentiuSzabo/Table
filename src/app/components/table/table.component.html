@@ -1,0 +1,46 @@
+<table class="table table-striped">
+  <thead>
+    <tr class="align-middle">
+      <th scope="col">
+        <input type="checkbox" (change)="selectAllRows($event)">
+      </th>
+      <th scope="col" *ngFor="let header of tableHeaders" class="text-capitalize text-center text-center cursor-resize" [columnResize]="120" [maxWidth]="400">
+        <div class="d-inline-flex">
+          <label class="handle"><i class="bi bi-grip-vertical"></i></label> {{ header }}
+        </div>
+      </th>
+      <th scope="col" [width]="120" class="text-center">
+        <button class="btn btn-danger btn-sm" *ngIf="isRowSelected" (click)="deleteRowMultiples.emit(selectedRows); $event.stopPropagation()">Delete</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let item of tableRows; let i = index">
+      <tr (mouseenter)="setHoveredRow(i)" (mouseleave)="clearHoveredRow()" class="align-middle text-center">
+        <td class="text-start">
+          <div class="d-inline-flex">
+            <input type="checkbox" class="pl-2" [(ngModel)]="selectedRows[i]">
+            <i [class]="getRowIconClass(item)" (click)="toggleRow(item)"></i>
+          </div>
+        </td>
+        <td *ngFor="let header of tableHeaders">{{ item[header] }}</td>
+        <td class="m-0 p-0">
+          <div class="hover-buttons d-inline-flex" *ngIf="isFirstLevelRowHovered(i) && !isRowSelected">
+            <button class="btn btn-primary btn-sm" (click)="editRowClick.emit(i); $event.stopPropagation()" *ngIf="isFirstLevel">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteRowClick.emit(item); $event.stopPropagation()">Delete</button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="item.expanded && item.children && item.children.length > 0">
+        <td colspan="12">
+          <agb-table
+            [tableRows]="item.children"
+            [tableHeaders]="tableHeaders"
+            [isFirstLevel]="false"
+            (deleteRowClick) = "deleteRowClick.emit(item)">
+          </agb-table>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
